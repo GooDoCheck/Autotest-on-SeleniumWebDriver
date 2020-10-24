@@ -102,8 +102,7 @@ public class TestWebsite {
             testWebsiteResultPage1.inputCrossTown(ConfProperties.getProperty("crossTown"));
             //Прокручиваем страницу до кнопки "Рассчитать"
             testWebsiteResultPage1.moveToCalcBtn();
-            //Запускаем ожидание на 1 минуту
-            Thread.sleep(60000);
+
 
             //Нажимаем на кнопку "Рассчитать"
             testWebsiteResultPage1.clickCalcBtn();
