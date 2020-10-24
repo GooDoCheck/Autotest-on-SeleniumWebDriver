@@ -2,8 +2,8 @@
 Домашнее задание на позицию QA Automation, с использованием Java, Maven, Selenium WebDriver, Junit
 Homework for the QA Automation position, using Java, Maven, Selenium WebDriver, Junit
 
-# Test script
-'rus
+## Test script
+
 1.	The user visits the Yandex website: www.yandex.ru
 2.	Enters the phrase «расчет расстояний между городами» into the search line and starts the search
 3.	Among the search results, the user searches for a result from the site «avtodispetcher.ru»
@@ -17,4 +17,4 @@ Homework for the QA Automation position, using Java, Maven, Selenium WebDriver, 
 7.	The user checks that the calculated distance = 897 км, and the cost of fuel = 3726 руб.
 8.	User clicks on «Изменить маршрут»
 9.	In the form that opens, in the field «Через города» user enters «Великий Новгород» and clicks "Calculate"
-10.	The user checks that the distance is now = 966 км, and the cost of fuel = 4002 руб. dir /fonts'
+10.	The user checks that the distance is now = 966 км, and the cost of fuel = 4002 руб. dir /fonts
