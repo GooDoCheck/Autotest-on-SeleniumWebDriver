@@ -44,7 +44,7 @@ public class TestWebsite {
          * тестовый метод для осуществления поиска страницы
          */
         @Test
-        public void autoTestWebsite () throws NullPointerException, InterruptedException {
+        public void autoTestWebsite () throws NullPointerException {
             //Для получения доступа к элементам странницы, согласно шаблона проектирования Page Object, для каждой страницы
             //написан класс, в котором определяются локаторы необходимых элементов, и прописаны методы для взаимодействия с ними
             //Вводим поисковой запрос в поле ввода главной страницы Яндекса, при помощи метода inputSearchQuery
