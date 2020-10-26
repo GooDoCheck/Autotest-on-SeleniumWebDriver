@@ -22,7 +22,7 @@ This test worked on Windows 10 and chrome browser ver. 86.0.4240.111
 
 ## Preparation for launch test
 
-To run this autotest, you need an installed and configured path variable for maven 3.6.3 or higher and jdk 14.
+To run this autotest, you need an installed and configured path variable for maven 3.6.3 or latest and jdk 14.
 Also you need installed chrome browser ver. 86.0.4240.111 or old version.
 
 ## How to launch test
