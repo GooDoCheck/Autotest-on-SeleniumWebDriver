@@ -1,6 +1,5 @@
 # Autotest-on-SeleniumWebDriver
-Домашнее задание на позицию QA Automation, с использованием Java, Maven, Selenium WebDriver, Junit
-Homework for the QA Automation position, using Java, Maven, Selenium WebDriver, Junit.
+Test task for QA Automation position using Java, Maven, Selenium WebDriver, Junit.
 This test worked on Windows 10 and chrome browser ver. 86.0.4240.111
 
 ## Test script
