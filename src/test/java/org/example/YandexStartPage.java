@@ -14,7 +14,8 @@ public class YandexStartPage {
     public WebDriver driver;
     public YandexStartPage (WebDriver driver) {
         PageFactory.initElements(driver, this);
-        this.driver = driver; }
+        this.driver = driver;
+    }
     /**
      * определение локатора поля ввода поискового запроса
      */
@@ -23,13 +24,15 @@ public class YandexStartPage {
     /**
      * определение локатора кнопки начала поиска
      */
-    @FindBy(xpath="//button[@type='submit']")
+    @FindBy(css="body > main > div.body__content > form > div.search3__inner > button")
     private WebElement SearchBtn;
     /**
      * метод для ввода поискового запроса в поле
      */
+
     public void inputSearchQuery(String text) {
-        TextField.sendKeys(text); }
+        TextField.sendKeys(text);
+    }
     /**
      * метод для осуществления нажатия кнопки поиска
      */
