@@ -4,8 +4,10 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -39,52 +41,51 @@ public class TestWebsite {
         driver.get(ConfProperties.getProperty("startPage"));}
 
 
-        @Test
-        public void autoTestWebsite () throws NullPointerException {
+    @Test
+    public void autoTestWebsite () throws NullPointerException {
+        yandexStartPage.inputSearchQuery(ConfProperties.getProperty("text"));
+        yandexStartPage.clickSearchBtn();
+        Set<String> oldWindowsSet = driver.getWindowHandles();
+        yandexSearchPage.entryToWebsite();
 
-            yandexStartPage.inputSearchQuery(ConfProperties.getProperty("text"));
-            yandexStartPage.clickSearchBtn();
-            Set<String> oldWindowsSet = driver.getWindowHandles();
-            yandexSearchPage.entryToWebsite();
+        String newWindow = (new WebDriverWait(driver, 10))
+            .until((ExpectedCondition<String>) driver -> {
+                    assert driver != null;
+                    Set<String> newWindowsSet = driver.getWindowHandles();
+                    newWindowsSet.removeAll(oldWindowsSet);
+                    return newWindowsSet.size() > 0 ?
+                        newWindowsSet.iterator().next() : null;
+                }
+            );
 
-            String newWindow = (new WebDriverWait(driver, 10))
-                    .until((ExpectedCondition<String>) driver -> {
-                                assert driver != null;
-                                Set<String> newWindowsSet = driver.getWindowHandles();
-                        newWindowsSet.removeAll(oldWindowsSet);
-                        return newWindowsSet.size() > 0 ?
-                                newWindowsSet.iterator().next() : null;
-                    }
-                    );
+        driver.switchTo().window(newWindow);
 
-            driver.switchTo().window(newWindow);
+        Assert.assertTrue(testWebsiteMainPage.url().contains(ConfProperties.getProperty("searchPage")));
 
-            Assert.assertTrue(testWebsiteMainPage.url().contains(ConfProperties.getProperty("searchPage")));
+        testWebsiteMainPage.scrollToClcBtn();
+        testWebsiteMainPage.inputFrom(ConfProperties.getProperty("fromTown"));
+        testWebsiteMainPage.inputTo(ConfProperties.getProperty("toTown"));
+        testWebsiteMainPage.inputCosumption(ConfProperties.getProperty("fuelConsumption"));
+        testWebsiteMainPage.inputPrice(ConfProperties.getProperty("fuelPrice"));
+        testWebsiteMainPage.clickCalcBtn();
 
-            testWebsiteMainPage.scrollToClcBtn();
-            testWebsiteMainPage.inputFrom(ConfProperties.getProperty("fromTown"));
-            testWebsiteMainPage.inputTo(ConfProperties.getProperty("toTown"));
-            testWebsiteMainPage.inputCosumption(ConfProperties.getProperty("fuelConsumption"));
-            testWebsiteMainPage.inputPrice(ConfProperties.getProperty("fuelPrice"));
-            testWebsiteMainPage.clickCalcBtn();
+        Assert.assertEquals(ConfProperties.getProperty("firstTotalDistance"), testWebsiteResultPage1.getTotalDistance());
+        Assert.assertTrue(testWebsiteResultPage1.getCoast().contains(ConfProperties.getProperty("firstFuelCost")+" руб."));
 
-            Assert.assertEquals(ConfProperties.getProperty("firstTotalDistance"), testWebsiteResultPage1.getTotalDistance());
-            Assert.assertTrue(testWebsiteResultPage1.getCoast().contains(ConfProperties.getProperty("firstFuelCost")+" руб."));
+        testWebsiteResultPage1.moveToConfigBtn();
+        testWebsiteResultPage1.clickConfigRoute();
+        testWebsiteResultPage1.inputCrossTown(ConfProperties.getProperty("crossTown"));
+        testWebsiteResultPage1.moveToCalcBtn();
+        testWebsiteResultPage1.clickCalcBtn();
 
-            testWebsiteResultPage1.moveToConfigBtn();
-            testWebsiteResultPage1.clickConfigRoute();
-            testWebsiteResultPage1.inputCrossTown(ConfProperties.getProperty("crossTown"));
-            testWebsiteResultPage1.moveToCalcBtn();
-            testWebsiteResultPage1.clickCalcBtn();
-
-            Assert.assertEquals(ConfProperties.getProperty("SecondTotalDistance"), testWebsiteResultPage2.getTotalDistance());
-            Assert.assertTrue(testWebsiteResultPage2.getCoast().contains(ConfProperties.getProperty("SecondFuelCost")+" руб."));
+        Assert.assertEquals(ConfProperties.getProperty("SecondTotalDistance"), testWebsiteResultPage2.getTotalDistance());
+        Assert.assertTrue(testWebsiteResultPage2.getCoast().contains(ConfProperties.getProperty("SecondFuelCost")+" руб."));
 
 
-        }
-
-        @AfterClass
-        public static void tearDown () {
-            driver.quit();
-        }
     }
+
+    @AfterClass
+    public static void tearDown () {
+        driver.quit();
+    }
+}
